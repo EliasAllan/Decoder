@@ -14,11 +14,11 @@ function decode(messageFile) {
   // console.log(Array.isArray(rows));
   // console.log(unsortedRows);
 
-  const extractNumber = (s) => parseInt(s.replace(/\D/g, ''), 10);
+
+  const extractNumber = (s) => parseInt(s.replace(/\D/g, ""), 10);
 
   const rows = unsortedRows.sort((a, b) => extractNumber(a) - extractNumber(b));
- 
-  // console.log(rows);
+  
 
   let staircaseArray = [];
 
@@ -26,14 +26,17 @@ function decode(messageFile) {
 
   let stepSize = 1;
 
+  while (currentIndex < rows.length) {
+    const currentStep = rows.slice(currentIndex, currentIndex + stepSize);
+    staircaseArray.push(currentStep);
+    currentIndex += stepSize;
+    stepSize++;
+  }
+  // console.log(staircaseArray);
+  for(let i = 0; i < staircaseArray.length ; i++){
 
-while (currentIndex < rows.length) {
-  const currentStep = rows.slice(currentIndex, currentIndex + stepSize);
-  staircaseArray.push(currentStep);
-  currentIndex += stepSize;
-  stepSize++; 
+    let lastArrIndex = staircaseArray[i][staircaseArray[i].length-1]
+    console.log(lastArrIndex)
 }
-console.log(staircaseArray)
-
 }
-decode(messageFile);
+decode(messageFile)
