@@ -6,25 +6,32 @@ function decode(messageFile) {
   fileContent = data.toString();
 
   //splits the message into rows
-  let rows = fileContent.split("\r\n");
+  let unsortedRows = fileContent.split("\r\n");
   // console.log(rows);
   // console.log(typeof fileContent);
   // console.log(fileContent);
   // console.log(typeof rows);
   // console.log(Array.isArray(rows));
+  // console.log(unsortedRows);
+
+  const extractNumber = (s) => parseInt(s.replace(/\D/g, ''), 10);
+
+  const rows = unsortedRows.sort((a, b) => extractNumber(a) - extractNumber(b));
+ 
   // console.log(rows);
 
   let staircaseArray = [];
 
   let currentIndex = 0;
 
- 
+  let stepSize = 1;
+
 
 while (currentIndex < rows.length) {
-  const stepSize = currentIndex + 1;
   const currentStep = rows.slice(currentIndex, currentIndex + stepSize);
   staircaseArray.push(currentStep);
   currentIndex += stepSize;
+  stepSize++; 
 }
 console.log(staircaseArray)
 
